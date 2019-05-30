@@ -31,16 +31,15 @@ print("Score",regr.score(X_test,y_test))
 
 
 
-f = open("results_from_sckit_admission.txt","w+")
 
 hits = 0
 error = 0
 
 for x in range(len(Y_pred)):
-    f.write(("Predicted:{:.2f} ".format((Y_pred[x][0])) +"Real:{:.1f} ".format((y_test[x][0])) +"Absolute Error: "+str(Y_pred[x][0] - y_test[x][0]) +  "\n"))
+    print(("Predicted:{:.2f} ".format((Y_pred[x][0])) +"Real:{:.1f} ".format((y_test[x][0])) +"Absolute Error: "+str(Y_pred[x][0] - y_test[x][0]) +  "\n"))
     temp = (Y_pred[x][0] - y_test[x][0])**2
     error = error + temp
     if (abs(Y_pred[x][0] - y_test[x][0]) < 0.03):
             hits+=1
 f.write(("The final cost is sckit_learn : "+str(hits/len(y_test))))
-f.close()
+
