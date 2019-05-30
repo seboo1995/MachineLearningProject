@@ -55,7 +55,7 @@ dim = new_array_test.shape[1]
 new_array[:,:1] = np.ones((len(new_array),1))# adding the bias
 new_array_test[:,:1] = np.ones((len(new_array_test),1))#adding the bias
 
-grammian_matrix = np.zeros((dim,dim))#(36 36) len(X_train[:,1])
+grammian_matrix = np.zeros((dim,dim))
 for x in range(36):
     for y in range(x+1):
         temp = np.dot(new_array[:,x],new_array[:,y])
@@ -76,7 +76,6 @@ output = np.linalg.solve(grammian_matrix,res)
 #print(output)
 hits = 0
 error = 0
-f = open("results_from_NLR_admission.txt","w+")
 Y_pred = np.matmul(new_array_test,output)
 for x in range(len(Y_pred)):
     f.write(("Predicted:{:.2f} ".format((Y_pred[x][0])) +"Real:{:.1f} ".format((y_test[x][0])) +"Absolute Error: "+str(Y_pred[x][0] - y_test[x][0]) +  "\n"))
@@ -84,41 +83,4 @@ for x in range(len(Y_pred)):
     error = error + temp
     if (abs(Y_pred[x][0] - y_test[x][0]) < 0.03):
             hits+=1
-f.write(("The final cost is NLR : "+str(hits/len(y_test))))
-f.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print(("The final cost is NLR : "+str(hits/len(y_test))))
