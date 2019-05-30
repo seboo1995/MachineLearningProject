@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue May 14 13:24:12 2019
+
+@author: sebair
+"""
+import pandas as pd
+import numpy as np
+
+
+from sklearn.model_selection import train_test_split
+data = pd.read_csv("/home/sebair/Admission_Predict.csv")
+X = data.iloc[:,0:8]
+y = data.iloc[:,8:9]
+X = np.array(X)
+y = np.array(y)
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.3, random_state = 1)
+X_train[:,:1] = np.ones((len(X_train),1))
+X_test[:,:1] = np.ones((len(X_test),1))
+
+grammian_matrix = np.zeros((8,8))#len(X_train[:,1])
+for x in range(8):
+    for y in range(x+1):
+        temp = np.dot(X_train[:,x],X_train[:,y])
+        grammian_matrix[x][y] = temp
+        grammian_matrix[y][x] = temp
+
+res = np.zeros((8,1))
+print(y_train.shape)
+for i in range(8):
+    temp = np.dot(y_train[:,0],X_train[:,i])
+    res[i][0]= temp
+
+
+    
+print(grammian_matrix.shape)
+print(res.shape)
+output = np.linalg.solve(grammian_matrix,res)
+print("Weights:",output)
+Y_pred = np.matmul(X_test,output)
+for x in range(len(Y_pred)):
+     f.write(("Predicted:{:.2f} ".format((Y_pred[x][0])) +"Real:{:.1f} ".format((y_test[x][0])) +"Absolute Error: "+str(Y_pred[x][0] - y_test[x][0]) +  "\n"))
+     if (abs(Y_pred[x][0] - y_test[x][0]) < 0.03):
+         error+=1
+print("The final cost wiht OLR is : "+str(error/len(y_test)))
