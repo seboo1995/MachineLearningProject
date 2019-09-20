@@ -1,4 +1,3 @@
 # RGPPfinalproject
-Codes from Graduate Admisson and Housing prices dataset
-Linear Regression and Keras ANN on two datasets. I have my code on Linear Regression and I used the sckit library. Also there is the non-linear regression.
-All the code is written in Python and I have made my own score.
+Codes from Graduate Admisson and Housing prices dataset(the dataset were collected on Kaggle). The first dataset was called Graduate Admission, providing data about university applicants and their chances of admission. I tried to predict the chances of admission wiht Linear Regression and Neural Networks. Additionally, I created a Linear Regression method where in the Gradient Descent method, I just used python and python libraries to compute the diferential equations and equal them to zero, so I dont have to have more computation about finding the nearest(local) minimum. The second try was with using the famous sckit-learn library where it was straight-forward. The output of the execution of the codes is provided as txt file in this repo. 
+However, I wanted to test my knowledge on Aritificial Neural Networks, so I concluded to use the Keras library and tried to use their code to find my results. However I had difficulties adjusting the hyper-parameters, nevertheless I completed the code, and the results can be found also here in the txt files.
